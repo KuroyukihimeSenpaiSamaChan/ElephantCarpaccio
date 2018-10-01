@@ -13,15 +13,20 @@ public class Panier {
 		quantities.put("chevre", chevre);
 		quantities.put("yeti", yeti);
 	}
+	
+	public double getPrice() {
+		return ((double) quantities.get("chevre"))*chevre + ((double) quantities.get("yeti"))*yeti ;
+		
+	}
 
-	public double getPrice(int taxe) {
+	public double getPrice(String t) {
 		for(int i=0; i<taxesCode.length; i++)
-			if(taxesCode[i].equals(taxe))
+			if(taxesCode[i].equals(t))
 				this.taxe = i;
 		double ret = ((double) quantities.get("chevre"))*chevre + ((double) quantities.get("yeti"))*yeti ;
 		if(taxe >= 0)
 			ret *= taxes[taxe];
 		
-		return (double)Math.round(ret * 100d) / 100d;
+		return ret;
 	}
 }
