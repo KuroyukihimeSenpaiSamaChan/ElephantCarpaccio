@@ -13,6 +13,11 @@ public class Panier {
 		quantities.put("chevre", chevre);
 		quantities.put("yeti", yeti);
 	}
+	
+	public double getPrice() {
+		double price = ((double) quantities.get("chevre"))*chevre + ((double) quantities.get("yeti"))*yeti ;
+		return price * reduction();
+	}
 
 	public double getPrice(String taxeCode) {
 		double price = ((double) quantities.get("chevre"))*chevre + ((double) quantities.get("yeti"))*yeti ;
