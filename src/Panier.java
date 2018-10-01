@@ -13,20 +13,38 @@ public class Panier {
 		quantities.put("chevre", chevre);
 		quantities.put("yeti", yeti);
 	}
-	
-	public double getPrice() {
-		return ((double) quantities.get("chevre"))*chevre + ((double) quantities.get("yeti"))*yeti ;
-		
-	}
 
-	public double getPrice(String t) {
-		for(int i=0; i<taxesCode.length; i++)
-			if(taxesCode[i].equals(t))
-				this.taxe = i;
-		double ret = ((double) quantities.get("chevre"))*chevre + ((double) quantities.get("yeti"))*yeti ;
-		if(taxe >= 0)
-			ret *= taxes[taxe];
+	public double getPrice(String taxeCode) {
+		double price = ((double) quantities.get("chevre"))*chevre + ((double) quantities.get("yeti"))*yeti ;
 		
-		return ret;
+		if(taxeCode != "NULL") {
+			for(int i=0; i<taxesCode.length; i++)
+				if(taxesCode[i].equals(taxeCode))
+					this.taxe = i;
+			if(taxe >= 0)
+				price *= taxes[taxe];
+		}
+		
+		return price * reduction();
+	}
+	
+	private double reduction() {
+		int totalQuantity = 0;
+		
+		for(String s : quantities.keySet())
+			totalQuantity += quantities.get(s);
+		
+		if(totalQuantity >= 50000)
+			return 0.85;
+		else if(totalQuantity >= 10000)
+			return 0.9;
+		else if(totalQuantity >= 7000)
+			return 0.93;
+		else if(totalQuantity >= 5000)
+			return 0.95;
+		else if(totalQuantity >= 1000)
+			return 0.97;
+		
+		return 1.0;
 	}
 }

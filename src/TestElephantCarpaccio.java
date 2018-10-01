@@ -7,13 +7,13 @@ public class TestElephantCarpaccio {
 	@Test 
 	public void uneChevre() {
 		Panier panier1Item = new Panier(1,0);
-		assertTrue(199.98 == panier1Item.getPrice());
+		assertTrue(199.98 == panier1Item.getPrice("NULL"));
 	}
 	
 	@Test 
 	public void unPanier() {
 		Panier panierFinal = new Panier(5,2);
-		assertTrue(13255.9 == panierFinal.getPrice());
+		assertTrue(13255.9 == panierFinal.getPrice("NULL"));
 	}
 	
 	@Test
@@ -50,5 +50,11 @@ public class TestElephantCarpaccio {
 	public void unPanierFR() {
 		Panier panierDE = new Panier(2,1);
 		assertTrue(6527.96*1.196 == panierDE.getPrice("FR"));
+	}
+	
+	@Test
+	public void unPanierReduction3() {
+		Panier panierDE = new Panier(40000,20000);
+		assertTrue(130559200 * 0.85 == panierDE.getPrice("NULL"));
 	}
 }
