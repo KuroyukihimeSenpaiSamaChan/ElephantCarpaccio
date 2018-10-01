@@ -39,4 +39,10 @@ public class TestElephantCarpaccio {
 		Panier panierDE = new Panier(2,1);
 		assertTrue(6527.96*1.255 == panierDE.getPrice("IS"));
 	}
+	
+	@Test
+	public void unPanierCH() {
+		Panier panierDE = new Panier(2,1);
+		assertTrue(6527.96*1.08 == panierDE.getPrice("CH"));
+	}
 }
